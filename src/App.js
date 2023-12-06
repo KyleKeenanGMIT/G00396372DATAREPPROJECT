@@ -38,7 +38,6 @@ function App() {
             <Records />
           </Route>
           <Route path="/">
-            {/* Your home component or content */}
             <h1>Welcome to the Home Page</h1>
           </Route>
         </Switch>
