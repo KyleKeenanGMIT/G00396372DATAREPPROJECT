@@ -1,32 +1,52 @@
-import React, { useState, useEffect } from 'react';//usestate and use effect import
-import axios from 'axios';//axios import
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const MyComponent = () => {
-  const [records, setRecords] = useState([]);
+const Records = () => {
+    const [recordDetails, setRecordDetails] = useState(null);
 
-  useEffect(() => {
-    const fetchRecords = async () => {
-      try {
-        const response = await axios.get('https://zylalabs.com/api/1507/records+guinness+api/1241/get+guinness+record');//link to api for axios to gather.
-        setRecords(response.data);//setRecords variable used to house all the data in the api.
-      } catch (error) {
-        console.error('Error fetching api:', error);
-      }//error displayed if api cannot be gathered.
-    };
+    useEffect(() => {
+        const fetchRecords = async () => {
+            const options = {
+                method: 'GET',
+                url: 'https://guinness-world-records-api.p.rapidapi.com/guinness/recordDetails',
+                params: {
+                    href: '/world-records/82145-most-consecutive-vertical-push-ups',
+                },
+                headers: {
+                    'X-RapidAPI-Key': 'e7527f1016msh1fa96b68c145249p11b6fbjsna76b36e1067d',
+                    'X-RapidAPI-Host': 'guinness-world-records-api.p.rapidapi.com',
+                },
+            };
 
-    fetchRecords();//fetching records from api.
-  }, []);
+            try {
+                const response = await axios.request(options);
+                console.log('API Response:', response);
+                setRecordDetails(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
-  return (
-    <div>
-      <h1>Guinness Records</h1>
-      <ul>
-        {records.map(record => (
-          <li key={record.id}>{record.title}</li>
-        ))}
-      </ul>
-    </div>
-  );
+        fetchRecords();
+    }, []);
+
+    return (
+        <div>
+            <h1>Guinness World Records Data</h1>
+            {recordDetails ? (
+                <div>
+                    <h2>{recordDetails.titlesInfo.Who}</h2>
+                    <p>{recordDetails.titlesInfo.What}</p>
+                    <p>{recordDetails.titlesInfo.Where}</p>
+                    <p>{recordDetails.titlesInfo.When}</p>
+                    <p>{recordDetails.body.join('\n')}</p>
+                    {/* displays the title and description of the records */}
+                </div>
+            ) : (
+                <p>Loading Records:</p>
+            )}
+        </div>
+    );
 };
 
-export default MyComponent;
+export default Records;

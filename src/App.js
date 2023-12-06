@@ -2,6 +2,7 @@
 import React from 'react';
 import Records from './Records';
 
+
 function App() {
   return (
     <div className="App">
