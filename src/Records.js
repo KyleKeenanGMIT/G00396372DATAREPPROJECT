@@ -1,29 +1,32 @@
-//improting usestate and useeffect from react
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';//usestate and use effect import
+import axios from 'axios';//axios import
 
-const Records = () => {
-    const [records, setRecords] = useState([]);
+const MyComponent = () => {
+  const [records, setRecords] = useState([]);
 
-    useEffect(() => {
-        // Fetching records.js from express server
-        fetch('http://localhost:4000/records')
-            .then((response) => response.json())
-            .then((data) => setRecords(data));
-    }, []);
+  useEffect(() => {
+    const fetchRecords = async () => {
+      try {
+        const response = await axios.get('https://zylalabs.com/api/1507/records+guinness+api/1241/get+guinness+record');//link to api for axios to gather.
+        setRecords(response.data);//setRecords variable used to house all the data in the api.
+      } catch (error) {
+        console.error('Error fetching api:', error);
+      }//error displayed if api cannot be gathered.
+    };
 
-    return (
-        <div>{/*title and main div*/}
-            <h2>Guinness World Records</h2>
-            <ul>
-                {records.map((record) => (//map added with title, category and id of record.
-                    <li key={record._id}>
-                        {record.title} - {record.category}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+    fetchRecords();//fetching records from api.
+  }, []);
+
+  return (
+    <div>
+      <h1>Guinness Records</h1>
+      <ul>
+        {records.map(record => (
+          <li key={record.id}>{record.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default Records;//export.
+export default MyComponent;
