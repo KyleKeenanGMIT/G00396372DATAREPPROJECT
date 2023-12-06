@@ -1,7 +1,8 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Records from './Records';
+//switch import
+import Records from './Records';//importing records.js
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'; // Import Bootstrap components
 
 function App() {
