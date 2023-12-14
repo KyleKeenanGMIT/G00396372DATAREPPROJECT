@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const app = express();
 const bcrypt = require('bcrypt');
 const User = require('./components/User');
+const cors = require('cors');//cors import
 const PORT = process.env.PORT || 5000;
 
-
+app.use(cors());//cors import needed to get past login page
 app.use(express.json());
 
 // Registration Endpoint
