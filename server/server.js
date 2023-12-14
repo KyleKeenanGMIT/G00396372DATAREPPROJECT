@@ -6,7 +6,7 @@ const User = require('./components/User');
 const cors = require('cors');//cors import
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());//cors import needed to get past login page
+app.use(cors());
 app.use(express.json());
 
 // Registration Endpoint
@@ -31,7 +31,7 @@ app.post('/login', async (req, res) => {
     if (user && await bcrypt.compare(req.body.password, user.password)) {
       // Authentication successful
       res.json({ message: 'Logged in successfully' });
-      // Send back a token or user details as needed
+      
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -44,7 +44,7 @@ app.post('/login', async (req, res) => {
 const recordSchema = new mongoose.Schema({
   title: String,
   description: String,
-  // Add other fields as needed
+  
 });
 
 const Record = mongoose.model('Record', recordSchema);
@@ -56,7 +56,7 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0.hz2nopg.mongodb.net/?retryW
 
 // CORS Handling
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Update this in production
+  res.header('Access-Control-Allow-Origin', '*'); 
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });

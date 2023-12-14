@@ -1,37 +1,32 @@
-import React, { useState } from 'react'; // react and use state import
-import { Routes, Route, Link, Navigate } from 'react-router-dom'; // router import
-import Records from './routes/Records'; // records import
-import Create from './Create'; // crate.js import
-import Home from './routes/home'; // homepage import
-import Container from 'react-bootstrap/Container'; // react container import
-import Navbar from 'react-bootstrap/Navbar'; // react navbar import
-import Nav from 'react-bootstrap/Nav'; // nav import
-import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap import
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Records from './routes/Records';
+import Create from './Create';
+import Home from './routes/home';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // User is initially unauthorized to enter the website
-
-  // Function to handle user auth when the login is set to true!
-  const handleAuthentication = () => {
-    setIsAuthenticated(true);
-  };
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <div>
-      {/* Bootstrap Navbar import */}
+    <Router>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand as={Link} to="/">
             Guinness World Records
-          </Navbar.Brand> {/* Nav bar title */}
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/login">
                 Login/Signup
-              </Nav.Link> {/* Login/Signup title */}
-              {isAuthenticated && ( // Show these links only if authenticated
+              </Nav.Link>
+              {isAuthenticated && (
                 <>
                   <Nav.Link as={Link} to="/">
                     Home
@@ -49,25 +44,13 @@ function App() {
         </Container>
       </Navbar>
 
-      {/* Route links in the navbar */}
       <Routes>
-        {/* Login route */}
-        <Route
-          path="/login"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/" />
-            ) : (
-              <Login onAuthenticate={handleAuthentication} />
-            )
-          }
-        />
-        {/* Protected routes */}
-        <Route path="/" element={<Home />} /> {/* homepage */}
-        <Route path="/view-records" element={<Records />} /> {/* viewing records route */}
-        <Route path="/create" element={<Create />} /> {/* creating new records route */}
+        <Route path="/login" element={<Login onAuthenticate={setIsAuthenticated} />} />
+        <Route path="/" element={<PrivateRoute isAuthenticated={isAuthenticated}><Home /></PrivateRoute>} />
+        <Route path="/view-records" element={<PrivateRoute isAuthenticated={isAuthenticated}><Records /></PrivateRoute>} />
+        <Route path="/create" element={<PrivateRoute isAuthenticated={isAuthenticated}><Create /></PrivateRoute>} />
       </Routes>
-    </div>
+    </Router>
   );
 }
 

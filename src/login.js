@@ -1,12 +1,13 @@
-// Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
-function Login() {
+function Login({ onAuthenticate }) {
   const [isLogin, setIsLogin] = useState(true);
   const [userCredentials, setUserCredentials] = useState({
     email: '',
     password: '',
   });
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -26,6 +27,10 @@ function Login() {
       const data = await response.json();
       if (response.ok) {
         console.log(data.message);
+
+        
+        onAuthenticate(true); 
+        navigate('/'); 
       } else {
         throw new Error(data.message);
       }
