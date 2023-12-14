@@ -18,6 +18,7 @@ function App() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/">Home</Nav.Link> {/* home title */}
+                <Nav.Link as={Link} to="/view-records">View Records</Nav.Link> {/* view existing records */}
                 <Nav.Link as={Link} to="/create">Add Record</Nav.Link> {/* create.js title */}
               </Nav>
             </Navbar.Collapse>
@@ -27,7 +28,8 @@ function App() {
         {/* Route links in the navbar */}
         <Routes>
         <Route path="/" exact element={<Records />} />
-        <Route path="/create" element={<Create />} />
+        <Route path="/view-records" element={<Records />} /> {/* viewing records route */}
+        <Route path="/create" element={<Create />} /> {/* crwting new records route */}
         </Routes>
       </div>
     
