@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const bcrypt = require('bcrypt');
-const User = require('./components/user')
+const User = require('./components/User');
 const PORT = process.env.PORT || 5000;
 
 
