@@ -2,6 +2,7 @@ import React from 'react'; // routes import
 import { Routes, Route , Link } from 'react-router-dom'; // router import
 import Records from './routes/Records'; // records import
 import Create from './Create'; // crate.js import
+import Home from './routes/home'; // homepage import
 import Container from 'react-bootstrap/Container'; // react container import
 import Navbar from 'react-bootstrap/Navbar'; // react navbar import
 import Nav from 'react-bootstrap/Nav'; // nav import
@@ -27,7 +28,7 @@ function App() {
 
         {/* Route links in the navbar */}
         <Routes>
-        <Route path="/" exact element={<Records />} />
+        <Route path="/" exact element={<Home />} /> {/* homepagee */}
         <Route path="/view-records" element={<Records />} /> {/* viewing records route */}
         <Route path="/create" element={<Create />} /> {/* crwting new records route */}
         </Routes>

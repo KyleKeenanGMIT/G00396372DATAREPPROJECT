@@ -27,6 +27,11 @@ app.post('/records', (req, res) => {
   res.status(201).send('Record has been added to database!');
 });
 
+app.get('/records', (req, res) => {
+  res.json(records); // server is gathering added records.
+});
+
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
