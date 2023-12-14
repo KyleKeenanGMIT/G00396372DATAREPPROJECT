@@ -2,6 +2,13 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const mongoose = require('mongoose');//mongodb import cluster
+
+mongoose.connect('mongodb+srv://admin:<admin>@cluster0.hz2nopg.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })//connection string
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB', err));//error if unable to connect
+
+
 // CORS handling
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
