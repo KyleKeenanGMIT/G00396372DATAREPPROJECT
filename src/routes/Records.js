@@ -43,7 +43,7 @@ const Records = () => {
   return (
     <div>
       <h1>Guinness World Records Data</h1>
-      {/* Display API Records */}
+      {/* Displaying API Records */}
       {apiRecords ? (
         <div>
           <h2>{apiRecords.titlesInfo.Who}'s Record</h2>
@@ -53,13 +53,13 @@ const Records = () => {
       ) : (
         <p>Loading API Records...</p>
       )}
-      {/* Display Server Records */}
+      {/* Displaying Server Records */}
       {serverRecords.length > 0 ? (
         <div>
           <h2>Server Records</h2>
           {serverRecords.map((record, index) => (
             <div key={index}>
-              {/* Display server record details here */}
+              {/* Displaying server record details here */}
               <p>{record.title} - {record.description}</p>
             </div>
           ))}
