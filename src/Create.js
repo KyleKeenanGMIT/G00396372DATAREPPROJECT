@@ -1,21 +1,23 @@
-
-import React, { useState } from 'react';
+import React, { useState } from 'react'; //usestate import
 
 function Create() {
-  const [record, setRecord] = useState({
+  // Initial state to clear form after use.
+  const initialState = {
     title: '',
     description: '',
-  });
+  };
+
+  const [record, setRecord] = useState(initialState); // setting record
 
   const handleChange = (e) => {
     setRecord({ ...record, [e.target.name]: e.target.value });
-  };
+  };//changes
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      const response = await fetch('http://localhost:5000/records', {
+      const response = await fetch('http://localhost:5000/records', {//sends to server
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,9 +29,12 @@ function Create() {
         throw new Error('error');
       }
 
+      // clearing the form
+      setRecord(initialState);
+
     } catch (error) {
-      console.error('Failed to add record to data base:', error);
-      // error to show record could not be added/
+      console.error('Failed to add record to database:', error);
+      // error to show record could not be added to database
     }
   };
 
@@ -49,4 +54,4 @@ function Create() {
   );
 }
 
-export default Create;
+export default Create;//exporting create .js
