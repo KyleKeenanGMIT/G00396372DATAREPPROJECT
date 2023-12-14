@@ -1,7 +1,43 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const bcrypt = require('bcrypt');
+const User = require('./components/user')
 const PORT = process.env.PORT || 5000;
+
+
+app.use(express.json());
+
+// Registration Endpoint
+app.post('/register', async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10); // Hash the password
+    const user = new User({
+      email: req.body.email,
+      password: hashedPassword,
+    });
+    const newUser = await user.save();
+    res.status(201).json({ message: 'User created successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error registering new user' });
+  }
+});
+
+// Login Endpoint
+app.post('/login', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user && await bcrypt.compare(req.body.password, user.password)) {
+      // Authentication successful
+      res.json({ message: 'Logged in successfully' });
+      // Send back a token or user details as needed
+    } else {
+      res.status(401).json({ message: 'Invalid credentials' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error logging in' });
+  }
+});
 
 // Mongoose Schema and Model
 const recordSchema = new mongoose.Schema({
