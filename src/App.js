@@ -28,18 +28,22 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link> {/* home title */}
-              <Nav.Link as={Link} to="/view-records">
-                View Records
-              </Nav.Link> {/* view existing records */}
-              <Nav.Link as={Link} to="/create">
-                Add Record
-              </Nav.Link> {/* create.js title */}
               <Nav.Link as={Link} to="/login">
                 Login/Signup
-              </Nav.Link> {/* home title */}
+              </Nav.Link> {/* Login/Signup title */}
+              {isAuthenticated && ( // Show these links only if authenticated
+                <>
+                  <Nav.Link as={Link} to="/">
+                    Home
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/view-records">
+                    View Records
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/create">
+                    Add Record
+                  </Nav.Link>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -59,13 +63,9 @@ function App() {
           }
         />
         {/* Protected routes */}
-        {isAuthenticated ? (
-          <>
-            <Route path="/" element={<Home />} /> {/* homepage */}
-            <Route path="/view-records" element={<Records />} /> {/* viewing records route */}
-            <Route path="/create" element={<Create />} /> {/* creating new records route */}
-          </>
-        ) : null}
+        <Route path="/" element={<Home />} /> {/* homepage */}
+        <Route path="/view-records" element={<Records />} /> {/* viewing records route */}
+        <Route path="/create" element={<Create />} /> {/* creating new records route */}
       </Routes>
     </div>
   );
