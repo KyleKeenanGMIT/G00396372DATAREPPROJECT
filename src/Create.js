@@ -1,8 +1,52 @@
-// create.js
-import React from 'react';
 
-const Create = () => {
-  return <div>Create Component</div>;
-};
+import React, { useState } from 'react';
 
-export default Create;//exporting create.js - this will be used to create new records and add to the database.
+function Create() {
+  const [record, setRecord] = useState({
+    title: '',
+    description: '',
+  });
+
+  const handleChange = (e) => {
+    setRecord({ ...record, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('http://localhost:5000/records', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(record),
+      });
+
+      if (!response.ok) {
+        throw new Error('error');
+      }
+
+    } catch (error) {
+      console.error('Failed to add record to data base:', error);
+      // error to show record could not be added/
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Title</label>
+        <input type="text" name="title" value={record.title} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Description</label>
+        <textarea name="description" value={record.description} onChange={handleChange}></textarea>
+      </div>
+      <button type="submit">Add Record</button>
+      {/* input fields to add a record */}
+    </form>
+  );
+}
+
+export default Create;

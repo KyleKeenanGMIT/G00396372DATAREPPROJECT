@@ -1,12 +1,9 @@
-// App.js
 import React from 'react';
 import Records from './routes/Records';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap import
-
-
-
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap import
+import Create from './Create'; // Import the Create component
 
 function App() {
   return (
@@ -19,10 +16,15 @@ function App() {
         </Container>
       </Navbar>
 
-      {/* Main content */}
+      
       <Container>
-        <h1>Your App</h1>
-        <Records />
+        <h1>Guinness World Records</h1>
+        
+        
+        <Create />{/* create component added to add new records */}
+
+        
+        <Records /> {/* records component added to view existing records */}
       </Container>
     </div>
   );
