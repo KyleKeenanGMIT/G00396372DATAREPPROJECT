@@ -1,0 +1,14 @@
+Guiness World Record App - Made by Kyle Keenan.
+
+Features a login page at the start, must login or register to continue. All users are saved to Mongo DB with encrypted passwords.
+You are unable to access any other pages of the website until login/register are completed due to private routing.
+
+When login is sucessful user can go to view existing records, this will show the records gathered from my chosen API and records created by the user which are saved to Mongo db.
+
+User can also go to the create page to create a new record using the title and description, this will also upload and be saved to Mongo db, when going back to the view page it will appear there.
+
+There will be a edit & delete page, allowing the user to update existing records with new info. This will also change on the Mongo DB same goes for delete, if the user deletes and existing record it will also delete on the DB.
+
+To run the code you must open a cmd prompt and cd into the project folder, [npm install] is used to install my existing dependecies - for running the server open the intergrated terminal in vs code
+by right clicking on the server folder > open integrated terminal. then type node server.js to run the server, 
+this will connect up with the mongo db database also. To run the client go back to the cmd prompt and type npm start, will open up a browser window with the inital login page.
