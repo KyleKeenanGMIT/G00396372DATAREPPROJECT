@@ -1,6 +1,9 @@
 TO START PROJECT > SERVER FOLDER > SERVER.JS > RIGHT CLICK > OPEN IN INTERGRATED TERMINAL > TYPE NODE SERVER.JS INTO CONSOLE.
 > CMD PROMPT > CD INTO THE FOLDER > NPM START.
 
-You will first be greeted by a login page, you can use an existing account or create a new one. Existing account details: kkeenan16@gmail.com pass: kyle12345. All users are stored on the Database and passwords are encrypted.
+You will first be greeted by a login page, you can use an existing account or create a new one. Existing account details: kkeenan16@gmail.com pass: kyle12345. All users are stored on the Database and passwords are encrypted. You will be unable to access
+any other pages before logging in.
+
+You can then, view a record, create one, delete or edit an existing one. There are two kinds of records, one gathered from the API and ones made locally and uploaded to the server.
 
 
