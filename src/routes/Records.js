@@ -42,6 +42,22 @@ const Records = () => {
     fetchServerRecords();
   }, []);
 
+  const handleDelete = async (recordId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/records/${recordId}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Error deleting record');
+      }
+      // Remove the deleted record from the state to update the UI
+      setServerRecords(prevRecords => prevRecords.filter(record => record._id !== recordId));
+    } catch (error) {
+      console.error('Failed to delete the record:', error);
+    }
+  };
+  
+
   return (
     <div>
       <h1>Guinness World Records Data</h1>
