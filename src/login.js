@@ -40,12 +40,12 @@ function Login({ onAuthenticate }) {
   };
 
   return (
-    <Container className="login-0">
+    <Container className="mt-4">
       <Row className="justify-content-center">
         <Col md={6}>
           <h2 className="text-center">{isLogin ? 'Login' : 'Register'}</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="login-1">
+            <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
@@ -55,7 +55,7 @@ function Login({ onAuthenticate }) {
                 required
               />
             </Form.Group>
-            <Form.Group className="login-1">
+            <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
@@ -65,11 +65,11 @@ function Login({ onAuthenticate }) {
                 required
               />
             </Form.Group>
-            <Button variant="primary" type="submit" className="b-001">
+            <Button variant="primary" type="submit" className="w-100">
               {isLogin ? 'Login' : 'Create Account'}
             </Button>
           </Form>
-          <Button variant="link" onClick={() => setIsLogin(!isLogin)} className="b-002">
+          <Button variant="link" onClick={() => setIsLogin(!isLogin)} className="mt-3">
             {isLogin ? 'Need to create an account?' : 'Already have an account?'}
           </Button>
         </Col>
