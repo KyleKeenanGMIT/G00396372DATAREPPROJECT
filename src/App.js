@@ -38,6 +38,9 @@ function App() {
                   <Nav.Link as={Link} to="/create">
                     Add Record
                   </Nav.Link>
+                  <Nav.Link as={Link} to="/edit">
+                    Edit Existing Record
+                  </Nav.Link>
                 </>
               )}
             </Nav>
