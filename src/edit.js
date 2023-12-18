@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';//usestate,, usefffect import
+import { useParams, useNavigate } from 'react-router-dom';//react router dom import
 import { Container, Form, Button } from 'react-bootstrap'; // Import Bootstrap components
 
 function Edit() {
-  const [record, setRecord] = useState({
+  const [record, setRecord] = useState({//usetate allows me here to edit my existing record with new data
     title: '',
     description: '',
   });
@@ -14,7 +14,7 @@ function Edit() {
   useEffect(() => {
     const fetchRecord = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/records/${id}`);
+        const response = await fetch(`http://localhost:5000/records/${id}`);//gathering the record list to edit.
         if (!response.ok) {
           throw new Error('Record not found');
         }
@@ -51,7 +51,7 @@ function Edit() {
       });
 
       if (!response.ok) {
-        throw new Error('Error updating record');
+        throw new Error('Error updating record');//error resposne message will be displayed in console.
       }
       navigate('/view-records'); // Navigates to the record page to view after updating a record
     } catch (error) {
@@ -60,9 +60,9 @@ function Edit() {
   };
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4">{/* bootstrap stlying */}
       <h2>Edit Record</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}> 
         <Form.Group className="mb-3">
           <Form.Label>Title:</Form.Label>
           <Form.Control
@@ -83,7 +83,7 @@ function Edit() {
             required
           ></Form.Control>
         </Form.Group>
-        <Button variant="primary" type="submit">Update Record</Button>
+        <Button variant="primary" type="submit">Update Record</Button> {/* edit record button which will handle the change in data. */}
       </Form>
     </Container>
   );

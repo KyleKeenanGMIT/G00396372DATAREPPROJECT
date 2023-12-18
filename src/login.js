@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'; // Bootstrap imports
 
-function Login({ onAuthenticate }) {
+function Login({ onAuthenticate }) {//if the user is able to sign in properly it will allow them to access other pages of the website.
   const [isLogin, setIsLogin] = useState(true);
   const [userCredentials, setUserCredentials] = useState({
-    email: '',
+    email: '',//email and password needed to login/signup.
     password: '',
   });
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //use navigate here to send them to homepage after login
 
   // Handles changes in the form fields
   const handleChange = (e) => {
@@ -18,14 +18,14 @@ function Login({ onAuthenticate }) {
   // Handles form submission for login or registration
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = isLogin ? 'http://localhost:5000/login' : 'http://localhost:5000/register';
+    const url = isLogin ? 'http://localhost:5000/login' : 'http://localhost:5000/register';//user is given a choice either to login or register new account.
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json',//post method to server
         },
-        body: JSON.stringify(userCredentials),
+        body: JSON.stringify(userCredentials),//sends user details to database
       });
       const data = await response.json();
       if (response.ok) {
@@ -40,7 +40,7 @@ function Login({ onAuthenticate }) {
   };
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4">{/* bootstrap styling */}
       <Row className="justify-content-center">
         <Col md={6}>
           <h2 className="text-center">{isLogin ? 'Login' : 'Register'}</h2>
@@ -69,7 +69,7 @@ function Login({ onAuthenticate }) {
               {isLogin ? 'Login' : 'Create Account'}
             </Button>
           </Form>
-          <Button variant="link" onClick={() => setIsLogin(!isLogin)} className="mt-3">
+          <Button variant="link" onClick={() => setIsLogin(!isLogin)} className="mt-3"> {/* login button */}
             {isLogin ? 'Need to create an account?' : 'Already have an account?'}
           </Button>
         </Col>
@@ -77,5 +77,5 @@ function Login({ onAuthenticate }) {
     </Container>
   );
 }
-
+//export
 export default Login;

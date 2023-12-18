@@ -42,7 +42,7 @@ function Create() {
   };
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4">{/*boostrap syling */}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Title</Form.Label>

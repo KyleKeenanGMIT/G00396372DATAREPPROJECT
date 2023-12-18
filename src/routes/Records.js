@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'; // Import bootstrap for styling
 
 
-const Records = () => {
+const Records = () => {//setting server and api data to local variables
   const [apiRecords, setApiRecords] = useState(null);
   const [serverRecords, setServerRecords] = useState([]);
 
@@ -13,7 +13,7 @@ const Records = () => {
     const fetchApiRecords = async () => {
       const config = {
         method: 'get',
-        url: 'https://guinness-world-records-api.p.rapidapi.com/guinness/recordDetails',
+        url: 'https://guinness-world-records-api.p.rapidapi.com/guinness/recordDetails',//gathering api with my key and relevant details
         params: { href: '/world-records/82145-most-consecutive-vertical-push-ups' },
         headers: {
           'X-RapidAPI-Key': 'e7527f1016msh1fa96b68c145249p11b6fbjsna76b36e1067d',
@@ -25,7 +25,7 @@ const Records = () => {
         const response = await axios(config);
         setApiRecords(response.data);
       } catch (error) {
-        console.error('Error fetching API Data:', error);
+        console.error('Error fetching API Data:', error);//api cannot be gathered usually down to exceeded limits.
       }
     };
 
@@ -45,7 +45,7 @@ const Records = () => {
 
   const handleDelete = async (recordId) => {
     try {
-      const response = await fetch(`http://localhost:5000/records/${recordId}`, {
+      const response = await fetch(`http://localhost:5000/records/${recordId}`, {//delete option displayed beside the record
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -60,8 +60,8 @@ const Records = () => {
   
 
   return (
-    <Container className="mt-4">
-    <h1 className="text-center mb-4">Guinness World Records Data</h1>
+    <Container className="mt-4">{/* bootstrap stlying*/}
+    <h1 className="text-center mb-4">Guinness World Records Data</h1>{/* title displayed above api data */}
 
     {/* Displaying API Records */}
     {apiRecords ? (
@@ -73,7 +73,7 @@ const Records = () => {
         </Card.Body>
       </Card>
     ) : (
-      <p>Loading API Records...</p>
+      <p>Loading API Records...</p>//simple loading msg
     )}
 
     {/* Displaying Server Records */}
@@ -86,7 +86,7 @@ const Records = () => {
               {record.title} - {record.description}
               <div>
                 <Link to={`/edit/${record._id}`} className="btn btn-primary me-2">Edit Record</Link>
-                <Button variant="danger" onClick={() => handleDelete(record._id)}>Delete</Button>
+                <Button variant="danger" onClick={() => handleDelete(record._id)}>Delete</Button>{/* delete button for deleting a record */}
               </div>
             </ListGroupItem>
           ))}

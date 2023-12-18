@@ -4,9 +4,9 @@ const app = express();
 const bcrypt = require('bcrypt');
 const User = require('./components/User');
 const cors = require('cors');//cors import
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;//port 5000 is the port the server will run on.
 
-app.use(cors());
+app.use(cors());//cors used to prevent errors when routing.
 app.use(express.json());
 
 // Registration Endpoint
@@ -68,7 +68,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-
+//post method to send records to server
 app.post('/records', async (req, res) => {
   try {
     const newRecord = new Record(req.body);
@@ -78,7 +78,7 @@ app.post('/records', async (req, res) => {
     res.status(500).send('Error saving record');
   }
 });
-
+//get method to gather records from local
 app.get('/records', async (req, res) => {
   try {
     const records = await Record.find();
@@ -87,7 +87,7 @@ app.get('/records', async (req, res) => {
     res.status(500).send('Error fetching records');
   }
 });
-
+//gathering record with its attached id assigned by MONGO DB Database
 app.get('/records/:id', async (req, res) => {
   try {
     const record = await Record.findById(req.params.id);
@@ -97,7 +97,7 @@ app.get('/records/:id', async (req, res) => {
     res.status(500).send('Error fetching record');
   }
 });
-
+//displaying gathered records for editing.
 app.put('/records/:id', async (req, res) => {
   try {
     const record = await Record.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -107,7 +107,7 @@ app.put('/records/:id', async (req, res) => {
     res.status(500).send('Error updating record');
   }
 });
-
+//option to delete gathered records from database
 app.delete('/records/:id', async (req, res) => {
   try {
     const record = await Record.findByIdAndDelete(req.params.id);

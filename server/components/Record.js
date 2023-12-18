@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-// Define a schema
+// Defining the schmea
 const recordSchema = new mongoose.Schema({
   title: String,
   description: String,
-});
+});//schema
 
-// Create a model
+// Creatuing a record model
 const Record = mongoose.model('Record', recordSchema);
 
 module.exports = Record; // Exporting record.js
