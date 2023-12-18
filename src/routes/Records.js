@@ -60,9 +60,10 @@ const Records = () => {
         <div>
           <h2>Server Records</h2>
           {serverRecords.map((record, index) => (
-            <div key={index}>
+           <div key={record._id}>
               {/* Displaying server record details here */}
               <p>{record.title} - {record.description}</p>
+              <Link to={`/edit/${record._id}`}>Edit Record</Link> {/* goes to edit.js to update existing record */}
             </div>
           ))}
         </div>

@@ -11,6 +11,7 @@ import Login from './Login';
 import PrivateRoute from './PrivateRoute';
 import Edit from './edit'; //edit imported
 
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -53,7 +54,7 @@ function App() {
         <Route path="/" element={<PrivateRoute isAuthenticated={isAuthenticated}><Home /></PrivateRoute>} />
         <Route path="/view-records" element={<PrivateRoute isAuthenticated={isAuthenticated}><Records /></PrivateRoute>} />
         <Route path="/create" element={<PrivateRoute isAuthenticated={isAuthenticated}><Create /></PrivateRoute>} />
-        <Route path="/edit" element={<PrivateRoute isAuthenticated={isAuthenticated}><Create /></PrivateRoute>} />
+        <Route path="/edit/:id" element={<PrivateRoute isAuthenticated={isAuthenticated}><Edit /></PrivateRoute>} />
       </Routes>
     </Router>
   );
