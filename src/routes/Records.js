@@ -80,6 +80,7 @@ const Records = () => {
               {/* Displaying server record details here */}
               <p>{record.title} - {record.description}</p>
               <Link to={`/edit/${record._id}`}>Edit Record</Link> {/* goes to edit.js to update existing record */}
+              <button onClick={() => handleDelete(record._id)}>Delete</button> {/* delete button*/}
             </div>
           ))}
         </div>
