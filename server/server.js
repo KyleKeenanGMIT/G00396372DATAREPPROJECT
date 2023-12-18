@@ -12,7 +12,7 @@ app.use(express.json());
 // Registration Endpoint
 app.post('/register', async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10); // Hash the password
+    const hashedPassword = await bcrypt.hash(req.body.password, 10); // Hashing the password for encryption on mongo db database
     const user = new User({
       email: req.body.email,
       password: hashedPassword,
@@ -88,7 +88,7 @@ app.get('/records', async (req, res) => {
   }
 });
 
-// Start the Server
+// Start up the Server on port 5000.
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
