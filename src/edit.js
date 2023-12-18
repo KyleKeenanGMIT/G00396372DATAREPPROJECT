@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Form, Button } from 'react-bootstrap'; // Import Bootstrap components
 
 function Edit() {
   const [record, setRecord] = useState({
@@ -9,8 +10,8 @@ function Edit() {
   const { id } = useParams(); // Getting the record ID from URL parameters
   const navigate = useNavigate();
 
+  // Fetching the existing record data from the database
   useEffect(() => {
-    // Fetching the existing record data from the database
     const fetchRecord = async () => {
       try {
         const response = await fetch(`http://localhost:5000/records/${id}`);
@@ -28,10 +29,12 @@ function Edit() {
     fetchRecord();
   }, [id, navigate]);
 
+  // Handles changes in the form fields
   const handleChange = (e) => {
     setRecord({ ...record, [e.target.name]: e.target.value });
   };
 
+  // Handles form submission to update a record
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Updating records in the database
@@ -57,31 +60,32 @@ function Edit() {
   };
 
   return (
-    <div>
+    <Container className="mt-4">
       <h2>Edit Record</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Title:</Form.Label>
+          <Form.Control
             type="text"
             name="title"
             value={record.title || ''}
             onChange={handleChange}
             required
           />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Description:</Form.Label>
+          <Form.Control
+            as="textarea"
             name="description"
             value={record.description || ''}
             onChange={handleChange}
             required
-          ></textarea>
-        </div>
-        <button type="submit">Update Record</button>
-      </form>
-    </div>
+          ></Form.Control>
+        </Form.Group>
+        <Button variant="primary" type="submit">Update Record</Button>
+      </Form>
+    </Container>
   );
 }
 
