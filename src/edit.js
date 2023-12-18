@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function Edit() {
-  const [record, setRecord] = useState({});
+  const [record, setRecord] = useState({
+    title: '',
+    description: '',
+  });
   const { id } = useParams(); // Getting the record ID from URL parameters
   const navigate = useNavigate();
 
@@ -15,7 +18,7 @@ function Edit() {
           throw new Error('Record not found');
         }
         const data = await response.json();
-        setRecord(data);
+        setRecord(data); // setting new record data
       } catch (error) {
         console.error('Error fetching record:', error);
         navigate('/view-records'); // Redirects to view records if the fetch fails
@@ -38,7 +41,10 @@ function Edit() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(record),
+        body: JSON.stringify({
+          title: record.title,
+          description: record.description,
+        }),
       });
 
       if (!response.ok) {
@@ -55,16 +61,24 @@ function Edit() {
       <h2>Edit Record</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name:</label>
+          <label>Title:</label>
           <input
             type="text"
-            name="name"
-            value={record.name || ''}
+            name="title"
+            value={record.title || ''}
             onChange={handleChange}
             required
           />
         </div>
-        
+        <div>
+          <label>Description:</label>
+          <textarea
+            name="description"
+            value={record.description || ''}
+            onChange={handleChange}
+            required
+          ></textarea>
+        </div>
         <button type="submit">Update Record</button>
       </form>
     </div>

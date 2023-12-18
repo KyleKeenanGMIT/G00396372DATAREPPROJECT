@@ -88,6 +88,26 @@ app.get('/records', async (req, res) => {
   }
 });
 
+app.get('/records/:id', async (req, res) => {
+  try {
+    const record = await Record.findById(req.params.id);
+    if (!record) res.status(404).send('Record not found');
+    else res.json(record);
+  } catch (error) {
+    res.status(500).send('Error fetching record');
+  }
+});
+
+app.put('/records/:id', async (req, res) => {
+  try {
+    const record = await Record.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!record) res.status(404).send('Record not found');
+    else res.json(record);
+  } catch (error) {
+    res.status(500).send('Error updating record');
+  }
+});
+
 // Start up the Server on port 5000.
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
