@@ -108,6 +108,19 @@ app.put('/records/:id', async (req, res) => {
   }
 });
 
+app.delete('/records/:id', async (req, res) => {
+  try {
+    const record = await Record.findByIdAndDelete(req.params.id);
+    if (!record) {
+      return res.status(404).send('Record not in DB');
+    }
+    res.status(200).send('Record deleted successfully');
+  } catch (error) {
+    res.status(500).send('Error deleting record');
+  }
+});
+
+
 // Start up the Server on port 5000.
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
