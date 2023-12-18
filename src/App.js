@@ -15,6 +15,11 @@ import Edit from './edit'; //edit imported
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    //sets the authentication of the user to false when logging out.
+  };
+
   return (
     <Router>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -39,6 +44,9 @@ function App() {
                   <Nav.Link as={Link} to="/create">
                     Add Record
                   </Nav.Link>
+                  <Nav.Link as={Link} to="/login" onClick={handleLogout}>
+                    Logout
+                    </Nav.Link>
                 </>
               )}
             </Nav>
