@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Container, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'; // Import bootstrap for styling
+import { Container, Card, ListGroup, Button, Row, Col } from 'react-bootstrap'; // Import bootstrap for styling
 
 
 const Records = () => {//setting server and api data to local variables
@@ -60,42 +60,51 @@ const Records = () => {//setting server and api data to local variables
   
 
   return (
-    <Container className="mt-4">{/* bootstrap stlying*/}
-    <h1 className="text-center mb-4">Guinness World Records Data</h1>{/* title displayed above api data */}
+    <Container className="mt-4">
+      <h1 className="text-center mb-4">Guinness World Records Data</h1>
 
-    {/* Displaying API Records */}
-    {apiRecords ? (
-      <Card className="mb-3">
-        <Card.Body>
-          <Card.Title>{apiRecords.titlesInfo.Who}'s Record</Card.Title>
-          <Card.Text>{apiRecords.body[0]}</Card.Text>
-          <Card.Text>{apiRecords.body[1]}</Card.Text>
-        </Card.Body>
-      </Card>
-    ) : (
-      <p>Loading API Records...</p>//simple loading msg
-    )}
+      {/* Displaying API Records */}
+      {apiRecords ? (
+        apiRecords.body.map((record, index) => (
+          <Row key={index} className="mb-3">
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Text>{record}</Card.Text>
+                  <div>
+                <Link to={`/edit/${record._id}`} className="btn btn-primary me-2">Edit</Link>
+                <Button variant="danger" onClick={() => handleDelete(record._id)}>Delete</Button>
+              </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        ))
+      ) : (
+       <p></p> 
+      )}
 
-    {/* Displaying Server Records */}
-    {serverRecords.length > 0 ? (
-      <>
-        <h2 className="text-center mb-3">Server Records</h2>
+      {/* Displaying Server Records */}
+      <h2 className="text-center mb-3">Server Records</h2>
+      {serverRecords.length > 0 ? (
         <ListGroup>
           {serverRecords.map((record) => (
-            <ListGroupItem key={record._id} className="d-flex justify-content-between align-items-center">
-              {record.title} - {record.description}
-              <div>
-                <Link to={`/edit/${record._id}`} className="btn btn-primary me-2">Edit Record</Link>
-                <Button variant="danger" onClick={() => handleDelete(record._id)}>Delete</Button>{/* delete button for deleting a record */}
+            <ListGroup.Item key={record._id} className="d-flex justify-content-between align-items-center">
+              <div className="flex-grow-1 me-3">
+                <div><strong>Title:</strong> {record.title}</div>
+                <div><strong>Description:</strong> {record.description}</div>
               </div>
-            </ListGroupItem>
+              <div>
+                <Link to={`/edit/${record._id}`} className="btn btn-primary me-2">Edit</Link>
+                <Button variant="danger" onClick={() => handleDelete(record._id)}>Delete</Button>
+              </div>
+            </ListGroup.Item>
           ))}
         </ListGroup>
-      </>
-    ) : (
-      <p>Loading Server Records...</p>
-    )}
-  </Container>
+      ) : (
+        <p>Loading Server Records...</p>
+      )}
+    </Container>
   );
 };
 
