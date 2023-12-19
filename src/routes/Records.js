@@ -61,7 +61,7 @@ const Records = () => {//setting server and api data to local variables
 
   return (
     <Container className="mt-4">
-      <h1 className="text-center mb-4">Guinness World Records Data</h1>
+      <h1 className="text-center mb-4">Guinness World Records API Data</h1>
 
       {/* Displaying API Records */}
       {apiRecords ? (
